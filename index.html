@@ -2,23 +2,28 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
   <title>WC 2026 Predictions</title>
   <meta name="theme-color" content="#050A14"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #050A14; }
+    body { background: #050A14; color: #fff; }
+    #root { min-height: 100vh; }
     input[type=number]::-webkit-inner-spin-button { opacity: 1; }
   </style>
 </head>
 <body>
   <div id="root"></div>
-  <script type="text/babel">
+
+  <!-- React + ReactDOM UMD -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Babel standalone for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel" data-presets="react">
     const { useState, useEffect, useRef } = React;
-    
+
 const SUPABASE_URL = "https://ufskprebdlfikfzxgnut.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmc2twcmViZGxmaWtmenhnbnV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0MjMwNDAsImV4cCI6MjA5NTk5OTA0MH0.TRjs8rmyI2U0ug7HSG9H7lIqaAiWcJQ1kQ9PCl7AbDQ";
 
@@ -336,7 +341,7 @@ function ResetButton({ onReset }) {
   return <div style={{ fontSize:13,color:"#7DC364",fontWeight:700 }}>✓ تم المسح بنجاح</div>;
 }
 
-export default function App() {
+function App() {
   const [tab, setTab] = useState("next");
   const [players, setPlayers] = useState([
     { id:1, name:"اللاعب ١", color:PLAYER_COLORS[0], photo:null, pin:"" },
@@ -1703,8 +1708,9 @@ export default function App() {
   );
 }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App/>);
+    const domNode = document.getElementById('root');
+    const root = ReactDOM.createRoot(domNode);
+    root.render(React.createElement(App));
   </script>
 </body>
 </html>
