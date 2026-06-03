@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WC 2026 Predictions</title>
+  <meta name="theme-color" content="#050A14"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#050A14;color:#fff}
+    #loading{display:flex;align-items:center;justify-content:center;height:100vh;flex-direction:column;gap:16px;font-family:Cairo,sans-serif}
+    #root{display:none;min-height:100vh}
+    input[type=number]::-webkit-inner-spin-button{opacity:1}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    .trophy{animation:pulse 1.5s ease-in-out infinite;font-size:64px}
+  </style>
+</head>
+<body>
+<div id="loading">
+  <div class="trophy">🏆</div>
+  <div style="color:#C8A84B;font-size:13px;letter-spacing:3px;font-weight:700">WORLD CUP 2026</div>
+  <div style="color:rgba(255,255,255,0.4);font-size:11px">جارٍ التحميل...</div>
+</div>
+<div id="root"></div>
+
+<script>
+// Show loading immediately, then load Babel async
+function loadScript(src, cb) {
+  var s = document.createElement('script');
+  s.src = src;
+  s.onload = cb;
+  document.head.appendChild(s);
+}
+
+loadScript('https://unpkg.com/react@18/umd/react.production.min.js', function() {
+  loadScript('https://unpkg.com/react-dom@18/umd/react-dom.production.min.js', function() {
+    loadScript('https://unpkg.com/@babel/standalone/babel.min.js', function() {
+      // All loaded - now run the app
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('root').style.display = 'block';
+      
+      var script = document.createElement('script');
+      script.type = 'text/babel';
+      script.setAttribute('data-presets', 'react');
+      script.src = '/app.js';
+      document.body.appendChild(script);
+      Babel.transformScriptTags();
+    });
+  });
+});
+</script>
+</body>
+</html>
